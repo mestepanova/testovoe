@@ -1,0 +1,50 @@
+version: "2"
+
+issues:
+  max-same-issues: 50
+
+formatters:
+  enable:
+    - goimports
+    - golines
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/my/project
+    golines:
+      max-len: 120
+
+linters:
+  enable:
+    - errcheck
+    - govet
+    - staticcheck
+    - gocritic
+    - gosec
+    - dupl
+    - funlen 
+    - cyclop
+
+  settings:
+    cyclop:
+      max-complexity: 30
+      package-average: 10.0
+    funlen:
+      lines: 100
+      statements: 50
+    staticcheck:
+      checks:
+        - all
+        - -ST1005
+        - -ST1000
+        - -ST1020
+        - -ST1003
+
+  exclusions:
+    warn-unused: true
+    presets:
+      - std-error-handling
+      - common-false-positives
+    paths:
+      - ".*_test\\.go"
+      - ".*_mock\\.go"
